@@ -1,1 +1,0 @@
-add_executable(simple_test_c simple_test.c ../ctest_main.c)
