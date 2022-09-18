@@ -3,11 +3,23 @@
 - Склонируйте репозиторий
 - В корне проекта создайте файл `.gitignore`
 
+```
+.gitignore
+.cmake
+build
+.cache
+.idea
+.clang-tidy
+*.code-workspace
+settings.json
+cpp_properties.json
+```
+---
 
 
 - Проверьте, есть ли у вас директория `.vscode`. Если нет - создайте её. Содержимое директории - правила сборки кода для IDE
 - В `.vscode` создайте следующие файлы:<br />
----
+
 `settings.code-workspace` file:
 ```json
 {
