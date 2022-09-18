@@ -12,7 +12,7 @@ build
 .clang-tidy
 *.code-workspace
 settings.json
-cpp_properties.json
+*properties.json
 ```
 ---
 
