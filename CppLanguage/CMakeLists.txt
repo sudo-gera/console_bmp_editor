@@ -5,6 +5,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS  ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include_directories(.)
+add_subdirectory(any)
 add_subdirectory(playground)
 add_subdirectory(simple_test)
 add_subdirectory(array)
