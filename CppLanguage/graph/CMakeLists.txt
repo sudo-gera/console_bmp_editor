@@ -1,0 +1,1 @@
+add_executable(test_graph  src/arc_graph.cpp src/matrix_graph.cpp src/list_graph.cpp src/set_graph.cpp test_graph.cpp)
