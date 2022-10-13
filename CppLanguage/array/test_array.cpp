@@ -48,9 +48,9 @@ TEST_CASE("Array tests") {
 
   SECTION("Const methods") {  // Assertions are the same, but code won't compile in case of absence const qualifiers
     const Array<int, 4>& const_ref = arr;
-    REQUIRE(arr[0] == 1);
-    REQUIRE(arr.Front() == 1);
-    REQUIRE(arr.Back() == 4);
-    REQUIRE(arr.Data() == &arr[0]);
+    REQUIRE(const_ref[0] == 1);
+    REQUIRE(const_ref.Front() == 1);
+    REQUIRE(const_ref.Back() == 4);
+    REQUIRE(const_ref.Data() == &arr[0]);
   }
 }
