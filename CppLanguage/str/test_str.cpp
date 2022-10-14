@@ -161,7 +161,7 @@ TEST_CASE("Data access methods") {
     s.Back() = 'G';
   }
 
-  SECTION("SCtr, Data") {
+  SECTION("CStr, Data") {
     REQUIRE(s.CStr() == s.Data());
     REQUIRE(strcmp(s.CStr(), TEST_STRING) == 0);
     REQUIRE(s.CStr()[s.Size()] == '\0');  // Null-terminated.
