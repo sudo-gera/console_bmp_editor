@@ -7,7 +7,7 @@
 
 TEST_CASE("Constructor") {
   SECTION("Default") {
-    const Any any;
+    [[maybe_unused]]const Any any;
   }
 
   SECTION("Trivial types") {
