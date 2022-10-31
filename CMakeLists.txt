@@ -4,5 +4,4 @@ project(CourseRepo)
 
 enable_testing()
 
-add_subdirectory(CLanguage)
 add_subdirectory(CppLanguage)
