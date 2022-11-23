@@ -1,0 +1,7 @@
+/Users/gera/cpp-2022-sudo-gera/Projects/build/CMakeFiles/bmp_cli.dir
+/Users/gera/cpp-2022-sudo-gera/Projects/build/CMakeFiles/test.dir
+/Users/gera/cpp-2022-sudo-gera/Projects/build/CMakeFiles/edit_cache.dir
+/Users/gera/cpp-2022-sudo-gera/Projects/build/CMakeFiles/rebuild_cache.dir
+/Users/gera/cpp-2022-sudo-gera/Projects/build/tests/CMakeFiles/test.dir
+/Users/gera/cpp-2022-sudo-gera/Projects/build/tests/CMakeFiles/edit_cache.dir
+/Users/gera/cpp-2022-sudo-gera/Projects/build/tests/CMakeFiles/rebuild_cache.dir
