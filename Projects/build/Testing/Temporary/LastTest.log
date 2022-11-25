@@ -1,17 +1,17 @@
-Start testing: Nov 23 03:32 MSK
+Start testing: Nov 25 06:58 MSK
 ----------------------------------------------------------
 1/40 Testing: same_test8_create
 1/40 Test: same_test8_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test8.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test8.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test8_create" start time: Nov 23 03:32 MSK
+"same_test8_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.14 sec
+Test time =   0.35 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test8_create" end time: Nov 23 03:32 MSK
+"same_test8_create" end time: Nov 25 06:58 MSK
 "same_test8_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -19,29 +19,29 @@ Test Passed.
 2/40 Test: same_test8_check
 Command: "/usr/bin/diff" "../../tests/same/test8.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test8_check" start time: Nov 23 03:32 MSK
+"same_test8_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test8_check" end time: Nov 23 03:32 MSK
+"same_test8_check" end time: Nov 25 06:58 MSK
 "same_test8_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 3/40 Testing: same_trans_create
 3/40 Test: same_trans_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/trans.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/trans.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_trans_create" start time: Nov 23 03:32 MSK
+"same_trans_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.15 sec
+Test time =   0.20 sec
 ----------------------------------------------------------
 Test Passed.
-"same_trans_create" end time: Nov 23 03:32 MSK
+"same_trans_create" end time: Nov 25 06:58 MSK
 "same_trans_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -49,59 +49,59 @@ Test Passed.
 4/40 Test: same_trans_check
 Command: "/usr/bin/diff" "../../tests/same/trans.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_trans_check" start time: Nov 23 03:32 MSK
+"same_trans_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_trans_check" end time: Nov 23 03:32 MSK
+"same_trans_check" end time: Nov 25 06:58 MSK
 "same_trans_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 5/40 Testing: same_greenland_grid_velo_create
 5/40 Test: same_greenland_grid_velo_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/greenland_grid_velo.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/greenland_grid_velo.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_greenland_grid_velo_create" start time: Nov 23 03:32 MSK
+"same_greenland_grid_velo_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.49 sec
+Test time =   1.29 sec
 ----------------------------------------------------------
 Test Passed.
-"same_greenland_grid_velo_create" end time: Nov 23 03:32 MSK
-"same_greenland_grid_velo_create" time elapsed: 00:00:00
+"same_greenland_grid_velo_create" end time: Nov 25 06:58 MSK
+"same_greenland_grid_velo_create" time elapsed: 00:00:01
 ----------------------------------------------------------
 
 6/40 Testing: same_greenland_grid_velo_check
 6/40 Test: same_greenland_grid_velo_check
 Command: "/usr/bin/diff" "../../tests/same/greenland_grid_velo.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_greenland_grid_velo_check" start time: Nov 23 03:32 MSK
+"same_greenland_grid_velo_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_greenland_grid_velo_check" end time: Nov 23 03:32 MSK
+"same_greenland_grid_velo_check" end time: Nov 25 06:58 MSK
 "same_greenland_grid_velo_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 7/40 Testing: same_test32bf_create
 7/40 Test: same_test32bf_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test32bf.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test32bf.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32bf_create" start time: Nov 23 03:32 MSK
+"same_test32bf_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.13 sec
+Test time =   0.14 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32bf_create" end time: Nov 23 03:32 MSK
+"same_test32bf_create" end time: Nov 25 06:58 MSK
 "same_test32bf_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -109,29 +109,29 @@ Test Passed.
 8/40 Test: same_test32bf_check
 Command: "/usr/bin/diff" "../../tests/same/test32bf.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32bf_check" start time: Nov 23 03:32 MSK
+"same_test32bf_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32bf_check" end time: Nov 23 03:32 MSK
+"same_test32bf_check" end time: Nov 25 06:58 MSK
 "same_test32bf_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 9/40 Testing: same_test32v5_create
 9/40 Test: same_test32v5_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test32v5.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test32v5.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32v5_create" start time: Nov 23 03:32 MSK
+"same_test32v5_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.15 sec
+Test time =   0.20 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32v5_create" end time: Nov 23 03:32 MSK
+"same_test32v5_create" end time: Nov 25 06:58 MSK
 "same_test32v5_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -139,29 +139,29 @@ Test Passed.
 10/40 Test: same_test32v5_check
 Command: "/usr/bin/diff" "../../tests/same/test32v5.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32v5_check" start time: Nov 23 03:32 MSK
+"same_test32v5_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32v5_check" end time: Nov 23 03:32 MSK
+"same_test32v5_check" end time: Nov 25 06:58 MSK
 "same_test32v5_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 11/40 Testing: same_test32_create
 11/40 Test: same_test32_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test32.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test32.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32_create" start time: Nov 23 03:32 MSK
+"same_test32_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.13 sec
+Test time =   0.14 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32_create" end time: Nov 23 03:32 MSK
+"same_test32_create" end time: Nov 25 06:58 MSK
 "same_test32_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -169,29 +169,29 @@ Test Passed.
 12/40 Test: same_test32_check
 Command: "/usr/bin/diff" "../../tests/same/test32.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32_check" start time: Nov 23 03:32 MSK
+"same_test32_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32_check" end time: Nov 23 03:32 MSK
+"same_test32_check" end time: Nov 25 06:58 MSK
 "same_test32_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 13/40 Testing: same_snail_create
 13/40 Test: same_snail_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/snail.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/snail.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_snail_create" start time: Nov 23 03:32 MSK
+"same_snail_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.15 sec
+Test time =   0.21 sec
 ----------------------------------------------------------
 Test Passed.
-"same_snail_create" end time: Nov 23 03:32 MSK
+"same_snail_create" end time: Nov 25 06:58 MSK
 "same_snail_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -199,29 +199,29 @@ Test Passed.
 14/40 Test: same_snail_check
 Command: "/usr/bin/diff" "../../tests/same/snail.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_snail_check" start time: Nov 23 03:32 MSK
+"same_snail_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_snail_check" end time: Nov 23 03:32 MSK
+"same_snail_check" end time: Nov 25 06:58 MSK
 "same_snail_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 15/40 Testing: same_test24_create
 15/40 Test: same_test24_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test24.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test24.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test24_create" start time: Nov 23 03:32 MSK
+"same_test24_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.13 sec
+Test time =   0.14 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test24_create" end time: Nov 23 03:32 MSK
+"same_test24_create" end time: Nov 25 06:58 MSK
 "same_test24_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -229,59 +229,59 @@ Test Passed.
 16/40 Test: same_test24_check
 Command: "/usr/bin/diff" "../../tests/same/test24.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test24_check" start time: Nov 23 03:32 MSK
+"same_test24_check" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test24_check" end time: Nov 23 03:32 MSK
+"same_test24_check" end time: Nov 25 06:58 MSK
 "same_test24_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 17/40 Testing: same_index_create
 17/40 Test: same_index_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/index.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/index.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_index_create" start time: Nov 23 03:32 MSK
+"same_index_create" start time: Nov 25 06:58 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   5.03 sec
+Test time =  17.11 sec
 ----------------------------------------------------------
 Test Passed.
-"same_index_create" end time: Nov 23 03:32 MSK
-"same_index_create" time elapsed: 00:00:05
+"same_index_create" end time: Nov 25 06:59 MSK
+"same_index_create" time elapsed: 00:00:17
 ----------------------------------------------------------
 
 18/40 Testing: same_index_check
 18/40 Test: same_index_check
 Command: "/usr/bin/diff" "../../tests/same/index.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_index_check" start time: Nov 23 03:32 MSK
+"same_index_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.06 sec
+Test time =   0.08 sec
 ----------------------------------------------------------
 Test Passed.
-"same_index_check" end time: Nov 23 03:32 MSK
+"same_index_check" end time: Nov 25 06:59 MSK
 "same_index_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 19/40 Testing: same_all_gray_create
 19/40 Test: same_all_gray_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/all_gray.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/all_gray.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_all_gray_create" start time: Nov 23 03:32 MSK
+"same_all_gray_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.35 sec
+Test time =   0.46 sec
 ----------------------------------------------------------
 Test Passed.
-"same_all_gray_create" end time: Nov 23 03:32 MSK
+"same_all_gray_create" end time: Nov 25 06:59 MSK
 "same_all_gray_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -289,29 +289,29 @@ Test Passed.
 20/40 Test: same_all_gray_check
 Command: "/usr/bin/diff" "../../tests/same/all_gray.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_all_gray_check" start time: Nov 23 03:32 MSK
+"same_all_gray_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_all_gray_check" end time: Nov 23 03:32 MSK
+"same_all_gray_check" end time: Nov 25 06:59 MSK
 "same_all_gray_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 21/40 Testing: same_lena_create
 21/40 Test: same_lena_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/lena.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/lena.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_lena_create" start time: Nov 23 03:32 MSK
+"same_lena_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.18 sec
+Test time =   0.33 sec
 ----------------------------------------------------------
 Test Passed.
-"same_lena_create" end time: Nov 23 03:32 MSK
+"same_lena_create" end time: Nov 25 06:59 MSK
 "same_lena_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -319,59 +319,59 @@ Test Passed.
 22/40 Test: same_lena_check
 Command: "/usr/bin/diff" "../../tests/same/lena.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_lena_check" start time: Nov 23 03:32 MSK
+"same_lena_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_lena_check" end time: Nov 23 03:32 MSK
+"same_lena_check" end time: Nov 25 06:59 MSK
 "same_lena_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 23/40 Testing: same_wallpaperflare_create
 23/40 Test: same_wallpaperflare_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/wallpaperflare.com_wallpaper.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/wallpaperflare.com_wallpaper.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_wallpaperflare_create" start time: Nov 23 03:32 MSK
+"same_wallpaperflare_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =  15.19 sec
+Test time =  43.03 sec
 ----------------------------------------------------------
 Test Passed.
-"same_wallpaperflare_create" end time: Nov 23 03:32 MSK
-"same_wallpaperflare_create" time elapsed: 00:00:15
+"same_wallpaperflare_create" end time: Nov 25 06:59 MSK
+"same_wallpaperflare_create" time elapsed: 00:00:43
 ----------------------------------------------------------
 
 24/40 Testing: same_wallpaperflare_check
 24/40 Test: same_wallpaperflare_check
 Command: "/usr/bin/diff" "../../tests/same/wallpaperflare.com_wallpaper.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_wallpaperflare_check" start time: Nov 23 03:32 MSK
+"same_wallpaperflare_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.12 sec
+Test time =   0.11 sec
 ----------------------------------------------------------
 Test Passed.
-"same_wallpaperflare_check" end time: Nov 23 03:32 MSK
+"same_wallpaperflare_check" end time: Nov 25 06:59 MSK
 "same_wallpaperflare_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 25/40 Testing: same_test16_create
 25/40 Test: same_test16_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test16.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test16.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test16_create" start time: Nov 23 03:32 MSK
+"same_test16_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.37 sec
+Test time =   0.39 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test16_create" end time: Nov 23 03:32 MSK
+"same_test16_create" end time: Nov 25 06:59 MSK
 "same_test16_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -379,29 +379,29 @@ Test Passed.
 26/40 Test: same_test16_check
 Command: "/usr/bin/diff" "../../tests/same/test16.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test16_check" start time: Nov 23 03:32 MSK
+"same_test16_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test16_check" end time: Nov 23 03:32 MSK
+"same_test16_check" end time: Nov 25 06:59 MSK
 "same_test16_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 27/40 Testing: same_test1_create
 27/40 Test: same_test1_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test1.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test1.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test1_create" start time: Nov 23 03:32 MSK
+"same_test1_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.13 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test1_create" end time: Nov 23 03:32 MSK
+"same_test1_create" end time: Nov 25 06:59 MSK
 "same_test1_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -409,29 +409,29 @@ Test Passed.
 28/40 Test: same_test1_check
 Command: "/usr/bin/diff" "../../tests/same/test1.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test1_check" start time: Nov 23 03:32 MSK
+"same_test1_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test1_check" end time: Nov 23 03:32 MSK
+"same_test1_check" end time: Nov 25 06:59 MSK
 "same_test1_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 29/40 Testing: same_blackbuck_create
 29/40 Test: same_blackbuck_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/blackbuck.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/blackbuck.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_blackbuck_create" start time: Nov 23 03:32 MSK
+"same_blackbuck_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.22 sec
+Test time =   0.43 sec
 ----------------------------------------------------------
 Test Passed.
-"same_blackbuck_create" end time: Nov 23 03:32 MSK
+"same_blackbuck_create" end time: Nov 25 06:59 MSK
 "same_blackbuck_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -439,29 +439,29 @@ Test Passed.
 30/40 Test: same_blackbuck_check
 Command: "/usr/bin/diff" "../../tests/same/blackbuck.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_blackbuck_check" start time: Nov 23 03:32 MSK
+"same_blackbuck_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_blackbuck_check" end time: Nov 23 03:32 MSK
+"same_blackbuck_check" end time: Nov 25 06:59 MSK
 "same_blackbuck_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 31/40 Testing: same_bmp_24_create
 31/40 Test: same_bmp_24_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/bmp_24.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/bmp_24.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_bmp_24_create" start time: Nov 23 03:32 MSK
+"same_bmp_24_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.14 sec
+Test time =   0.18 sec
 ----------------------------------------------------------
 Test Passed.
-"same_bmp_24_create" end time: Nov 23 03:32 MSK
+"same_bmp_24_create" end time: Nov 25 06:59 MSK
 "same_bmp_24_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -469,29 +469,29 @@ Test Passed.
 32/40 Test: same_bmp_24_check
 Command: "/usr/bin/diff" "../../tests/same/bmp_24.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_bmp_24_check" start time: Nov 23 03:32 MSK
+"same_bmp_24_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_bmp_24_check" end time: Nov 23 03:32 MSK
+"same_bmp_24_check" end time: Nov 25 06:59 MSK
 "same_bmp_24_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 33/40 Testing: same_test32bfv4_create
 33/40 Test: same_test32bfv4_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test32bfv4.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test32bfv4.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32bfv4_create" start time: Nov 23 03:32 MSK
+"same_test32bfv4_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.15 sec
+Test time =   0.21 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32bfv4_create" end time: Nov 23 03:32 MSK
+"same_test32bfv4_create" end time: Nov 25 06:59 MSK
 "same_test32bfv4_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -499,29 +499,29 @@ Test Passed.
 34/40 Test: same_test32bfv4_check
 Command: "/usr/bin/diff" "../../tests/same/test32bfv4.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test32bfv4_check" start time: Nov 23 03:32 MSK
+"same_test32bfv4_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test32bfv4_check" end time: Nov 23 03:32 MSK
+"same_test32bfv4_check" end time: Nov 25 06:59 MSK
 "same_test32bfv4_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 35/40 Testing: same_dots_create
 35/40 Test: same_dots_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/dots.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/dots.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_dots_create" start time: Nov 23 03:32 MSK
+"same_dots_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.17 sec
+Test time =   0.28 sec
 ----------------------------------------------------------
 Test Passed.
-"same_dots_create" end time: Nov 23 03:32 MSK
+"same_dots_create" end time: Nov 25 06:59 MSK
 "same_dots_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -529,29 +529,29 @@ Test Passed.
 36/40 Test: same_dots_check
 Command: "/usr/bin/diff" "../../tests/same/dots.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_dots_check" start time: Nov 23 03:32 MSK
+"same_dots_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_dots_check" end time: Nov 23 03:32 MSK
+"same_dots_check" end time: Nov 25 06:59 MSK
 "same_dots_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 37/40 Testing: same_bmp_08_create
 37/40 Test: same_bmp_08_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/bmp_08.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/bmp_08.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_bmp_08_create" start time: Nov 23 03:32 MSK
+"same_bmp_08_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.15 sec
+Test time =   0.18 sec
 ----------------------------------------------------------
 Test Passed.
-"same_bmp_08_create" end time: Nov 23 03:32 MSK
+"same_bmp_08_create" end time: Nov 25 06:59 MSK
 "same_bmp_08_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -559,29 +559,29 @@ Test Passed.
 38/40 Test: same_bmp_08_check
 Command: "/usr/bin/diff" "../../tests/same/bmp_08.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_bmp_08_check" start time: Nov 23 03:32 MSK
+"same_bmp_08_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_bmp_08_check" end time: Nov 23 03:32 MSK
+"same_bmp_08_check" end time: Nov 25 06:59 MSK
 "same_bmp_08_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
 39/40 Testing: same_test4_create
 39/40 Test: same_test4_create
-Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "string" "infile" "../../tests/sources/test4.bmp" "string" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
+Command: "/Users/gera/cpp-2022-sudo-gera/Projects/build/bmp_cli" "str" "infile" "../../tests/sources/test4.bmp" "str" "outfile" "result.bmp" "bmp" "=" "read" "[" "infile" "]" "write" "[" "bmp" "outfile" "]"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test4_create" start time: Nov 23 03:32 MSK
+"same_test4_create" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.13 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test4_create" end time: Nov 23 03:32 MSK
+"same_test4_create" end time: Nov 25 06:59 MSK
 "same_test4_create" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -589,15 +589,15 @@ Test Passed.
 40/40 Test: same_test4_check
 Command: "/usr/bin/diff" "../../tests/same/test4.bmp" "result.bmp"
 Directory: /Users/gera/cpp-2022-sudo-gera/Projects/build/tests
-"same_test4_check" start time: Nov 23 03:32 MSK
+"same_test4_check" start time: Nov 25 06:59 MSK
 Output:
 ----------------------------------------------------------
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"same_test4_check" end time: Nov 23 03:32 MSK
+"same_test4_check" end time: Nov 25 06:59 MSK
 "same_test4_check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Nov 23 03:32 MSK
+End testing: Nov 25 06:59 MSK

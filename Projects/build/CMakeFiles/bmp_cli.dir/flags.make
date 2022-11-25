@@ -6,7 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGSx86_64 =  -g -fsanitize=address,undefined -Wfatal-errors -Ofast -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++20
+CXX_FLAGSx86_64 =  -g -fsanitize=address,undefined -Wfatal-errors -O0 -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++20
 
-CXX_FLAGS =  -g -fsanitize=address,undefined -Wfatal-errors -Ofast -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++20
+CXX_FLAGS =  -g -fsanitize=address,undefined -Wfatal-errors -O0 -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++20
 

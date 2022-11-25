@@ -21,6 +21,11 @@ void send_error(bool con,string mes){
     }
 }
 
+uint8_t&pixel::operator[](unsigned l){
+    return ((uint8_t*)(this))[l];
+}
+
+
 auto open_file(string filename,llu len=-1LLU){
     const char*file=filename.c_str();
     int fd=open(file,len==-1LLU ? O_RDWR : (O_RDWR|O_CREAT|O_TRUNC), S_IRWXU|S_IRWXG|S_IRWXO);
@@ -269,6 +274,7 @@ vector<vector<pixel>> bmp_read(string filename){
                     masks[2]=0b0000000000011111;
                     masks[3]=0b1000000000000000;
                 }
+                pixel _tmp;
                 for (llu c=0;c<4;++c){
                     tmp[c]=res&masks[c];
                     if (counts[c]>0){
@@ -277,7 +283,6 @@ vector<vector<pixel>> bmp_read(string filename){
                         tmp[c]<<=-counts[c];
                     }
                 }
-                pixel _tmp;
                 _tmp.red=tmp[0];
                 _tmp.green=tmp[1];
                 _tmp.blue=tmp[2];
