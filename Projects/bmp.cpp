@@ -8,8 +8,9 @@
 #include <tuple>
 #include <memory.h>
 #include <iostream>
-#include "bmp_lib.hpp"
 #include <memory>
+#include <algorithm>
+#include "bmp.hpp"
 using namespace std;
 
 using llu=long long unsigned;
@@ -20,10 +21,6 @@ void send_error(bool con,string mes){
         cerr<<mes<<endl;
         throw exception();
     }
-}
-
-uint8_t&pixel::operator[](unsigned l){
-    return ((uint8_t*)(this))[l];
 }
 
 
@@ -82,20 +79,6 @@ struct chars{
     }
 };
 
-#ifdef py_func
-    py_func(print_data)({
-        def print_data(data):
-            return f"{int.from_bytes(bytearray(data),'little')}"
-            return f"(repr={bytearray(data)}, list={data}, int={int.from_bytes(bytearray(data),'little')})"
-    })
-
-    template<llu n>
-    auto&operator<<(ostream&o,const chars<n>&q){
-        o<<string(print_data(vector<uint8_t>(q.data,q.data+n)));
-        return o;
-    }
-#endif
-
 struct bitmap_file_header{
     chars<2> header_field;
     chars<4> size_of_file_in_bytes;
@@ -103,8 +86,6 @@ struct bitmap_file_header{
     chars<2> reserved2;
     chars<4> starting_address_of_data; 
 };
-
-static_assert(sizeof(bitmap_file_header)==14);
 
 struct device_independent_bitmap{
     chars<4> size_of_header;
@@ -144,11 +125,11 @@ struct device_independent_bitmap{
 #define get_bit(a,s)   (((a)[(s)/8LLU/sizeof((a)[0])]>>(s)%(8LLU*sizeof((a)[0])))&1LLU)
 #define set_bit(a,s,d) {(a)[(s)/8LLU/sizeof((a)[0])]&=~(1LLU<<(s)%(8LLU*sizeof((a)[0])));(a)[(s)/8LLU/sizeof((a)[0])]+=((d)+0LLU)<<(s)%(8LLU*sizeof((a)[0]));}
 
-vector<vector<pixel>> bmp_read(string filename){
+bitmap bmp_read(string filename){
     auto uptr=open_file(filename);
     char*data=uptr->first;
     llu len=uptr->second;
-    vector<vector<pixel>> t;
+    bitmap t;
     send_error(len<=sizeof(bitmap_file_header),"file is too small");
     llu sizeof_dib_data=data[sizeof(bitmap_file_header)];
     send_error (len < sizeof(bitmap_file_header) + sizeof_dib_data, "file is too small");
@@ -299,7 +280,7 @@ vector<vector<pixel>> bmp_read(string filename){
 }
 
 
-void bmp_write(const vector<vector<pixel>> &a,string filename){
+void bmp_write(const bitmap&a,string filename){
     uint32_t height=a.size();
     uint32_t width=height?a[0].size():0;
     auto uptr=open_file(filename,height*width*4+54);
@@ -311,7 +292,7 @@ void bmp_write(const vector<vector<pixel>> &a,string filename){
     data++[0]=40;
     data++[0]=width;
     data++[0]=height;
-    data++[0]=2097153;
+    data++[0]=(32LLU<<16)+1;
     data++[0]=0;
     data++[0]=height * width * 4;
     data++[0]=1;
