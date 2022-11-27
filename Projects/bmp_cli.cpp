@@ -3,6 +3,8 @@
 #include <iostream>
 #include <map>
 #include <sstream>
+#include <variant>
+#include <functional>
 #include "bmp_lib.hpp"
 using namespace std;
     
@@ -42,12 +44,10 @@ auto read(const vector<universal>&args){
     return bmp_read(filename);
 };
 auto pwd(const vector<universal>&args){
-    system("pwd");
-    return 0;
+    return system("pwd");
 };
 auto ls(const vector<universal>&args){
-    system("ls");
-    return 0;
+    return system("ls");
 };
 auto write(const vector<universal>&args){
     vector<vector<pixel>>data;

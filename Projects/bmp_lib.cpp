@@ -9,6 +9,7 @@
 #include <memory.h>
 #include <iostream>
 #include "bmp_lib.hpp"
+#include <memory>
 using namespace std;
 
 using llu=long long unsigned;
@@ -38,7 +39,7 @@ auto open_file(string filename,llu len=-1LLU){
         lstat(file,&st);
         len=(llu)st.st_size;
     }else{
-        ftruncate(fd,len);
+        int tmp=ftruncate(fd,len);
     }
     if (errno){
         perror(nullptr);
