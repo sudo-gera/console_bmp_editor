@@ -39,7 +39,7 @@ auto open_file(string filename,llu len=-1LLU){
         int tmp=ftruncate(fd,len);
     }
     if (errno){
-        perror(to_string(len)+" lstat|ftruncate");
+        perror((to_string(len)+" lstat|ftruncate").c_str());
         close(fd);
         throw exception();
     }
