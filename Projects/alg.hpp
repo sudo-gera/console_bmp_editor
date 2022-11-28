@@ -1,3 +1,4 @@
+#pragma once
 #include "pix.hpp"
 
 bitmap negative(bitmap data);

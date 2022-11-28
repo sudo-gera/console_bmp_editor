@@ -10,6 +10,9 @@
 #include <iostream>
 #include <memory>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <string_view>
 #include "bmp.hpp"
 using namespace std;
 
@@ -23,42 +26,77 @@ void send_error(bool con,string mes){
     }
 }
 
-
-auto open_file(string filename,llu len=-1LLU){
-    const char*file=filename.c_str();
-    int fd=open(file,len==-1LLU ? O_RDWR : (O_RDWR|O_CREAT|O_TRUNC), S_IRWXU|S_IRWXG|S_IRWXO);
-    if (errno){
-        perror(file);
-        throw exception();
+#ifdef NO_MMAP
+    auto portable_mmap(const string&filename,llu len){
+        char*data=nullptr;
+        if (len==-1){
+            ifstream f(filename);
+            stringstream ss;
+            ss<<f.rdbuf();
+            string s=ss.str();
+            len=s.size();
+            data=(char*)new uint32_t[len/4+!!(len%4)];
+            memmove(data,s.data(),s.size());
+        }else{
+            data=(char*)new uint32_t[len/4+!!(len%4)];
+        }
+        pair t(data,len);
+        return t;
     }
-    if (len==-1LLU){
-        struct stat st;
-        lstat(file,&st);
-        len=(llu)st.st_size;
-    }else{
-        int tmp=ftruncate(fd,len);
+    auto portable_munmap(const string&filename,char*data,llu len){
+        ofstream f(filename);
+        f<<string_view(data,data+len);
+        delete[] data;
     }
-    if (errno){
-        perror((to_string(len)+" lstat|ftruncate").c_str());
+#else
+    auto portable_mmap(const string&filename,llu len){
+        const char*file=filename.c_str();
+        int fd=open(file,len==-1LLU ? O_RDWR : (O_RDWR|O_CREAT|O_TRUNC), S_IRWXU|S_IRWXG|S_IRWXO);
+        if (errno){
+            perror(file);
+            throw exception();
+        }
+        if (len==-1LLU){
+            struct stat st;
+            lstat(file,&st);
+            len=(llu)st.st_size;
+        }else{
+            int tmp=ftruncate(fd,len);
+        }
+        if (errno){
+            perror((to_string(len)+" lstat|ftruncate").c_str());
+            close(fd);
+            throw exception();
+        }
+        char*data=(char*)mmap(NULL,len,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
+        if (errno){
+            perror("mmap");
+            close(fd);
+            throw exception();
+        }
         close(fd);
-        throw exception();
+        if (errno){
+            perror("close");
+            munmap(data,len);
+            throw exception();
+        }
+        pair t(data,len);
+        return t;
     }
-    char*data=(char*)mmap(NULL,len,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
-    if (errno){
-        perror("mmap");
-        close(fd);
-        throw exception();
-    }
-    close(fd);
-    if (errno){
-        perror("close");
+    auto portable_munmap(const string&filename,char*data,llu len){
         munmap(data,len);
-        throw exception();
     }
-    pair t(data,len);
-    auto p=new pair(data,len);
-    auto d=[](auto p){
-        munmap(p->first,p->second);
+#endif
+
+
+
+auto open_file(const string&filename,llu len=-1LLU){
+    auto _t=portable_mmap(filename,len);
+    pair t(filename,_t);
+    auto p=new auto(t);
+    auto d=[=](auto p){
+        auto&t=*p;
+        portable_munmap(t.first,t.second.first,t.second.second);
         delete p;
     };
     unique_ptr<decltype(t),decltype(d)> u(p,d);
@@ -127,8 +165,8 @@ struct device_independent_bitmap{
 
 bitmap bmp_read(string filename){
     auto uptr=open_file(filename);
-    char*data=uptr->first;
-    llu len=uptr->second;
+    char*data=uptr->second.first;
+    llu len=uptr->second.second;
     bitmap t;
     send_error(len<=sizeof(bitmap_file_header),"file is too small");
     llu sizeof_dib_data=data[sizeof(bitmap_file_header)];
@@ -284,8 +322,8 @@ void bmp_write(const bitmap&a,string filename){
     uint32_t height=a.size();
     uint32_t width=height?a[0].size():0;
     auto uptr=open_file(filename,height*width*4+54);
-    uint32_t*data=(uint32_t*)(uptr->first);
-    llu len=uptr->second;
+    uint32_t*data=(uint32_t*)(uptr->second.first);
+    llu len=uptr->second.second;
     data++[0]=height * width * 4 + 54;
     data++[0]=0;
     data++[0]=54;
@@ -304,7 +342,7 @@ void bmp_write(const bitmap&a,string filename){
             data++[0]=(uint32_t&)w;
         }
     }
-    char*cdata=uptr->first;
+    char*cdata=uptr->second.first;
     memmove(cdata+2,cdata,len-2);
     cdata[0]='B';
     cdata[1]='M';

@@ -99,9 +99,11 @@ try_invoke_create(negative)
     ([](auto var,const vector<universal_arg>&a){                               \
         return call([&](auto a_ptr){                                           \
             if constexpr (tuple_size_v<remove_reference_t<decltype(*a_ptr)>>){ \
+                remove_cvref_t<decltype(*a_ptr)> tmp;                          \
+                copy(a.begin(),a.end(),tmp.begin());                           \
                 apply([&](auto&...a){                                          \
                     try_invoke_##fun(var,a...);                                \
-                },*(decltype(a_ptr))(a.data()));                               \
+                },tmp);                                                        \
             }else{                                                             \
                 try_invoke_##fun(var);                                         \
             }                                                                  \

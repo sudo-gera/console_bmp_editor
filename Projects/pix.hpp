@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <stdint.h>
+// #define log {printf("%s%i%s%s%s%s\n","line: ",(int)__LINE__," file: ",__FILE__," func: ",__PRETTY_FUNCTION__);fflush(stdout);}
 struct pixel{
     uint8_t blue;
     uint8_t green;
