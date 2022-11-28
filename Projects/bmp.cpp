@@ -39,19 +39,19 @@ auto open_file(string filename,llu len=-1LLU){
         int tmp=ftruncate(fd,len);
     }
     if (errno){
-        perror(nullptr);
+        perror(to_string(len)+" lstat|ftruncate");
         close(fd);
         throw exception();
     }
     char*data=(char*)mmap(NULL,len,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
     if (errno){
-        perror(nullptr);
+        perror("mmap");
         close(fd);
         throw exception();
     }
     close(fd);
     if (errno){
-        perror(nullptr);
+        perror("close");
         munmap(data,len);
         throw exception();
     }
