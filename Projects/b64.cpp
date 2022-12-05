@@ -1,0 +1,68 @@
+#include <string>
+#include <iostream>
+#include <cstring>
+using namespace std;
+using llu = long long unsigned;
+
+string b64encode(const string&in){
+    string out;
+    for (llu q=0;q<in.size();q+=3){
+        uint8_t w[3]={0,0,0};
+        uint8_t e[4]={0,0,0,0};
+        memmove(w,in.data()+q,min(3LLU,in.size()-q));
+        e[0] |= (w[0] & 0b11'11'11'00) >> 2 & 0b11'11'11;
+        e[1] |= (w[0] & 0b00'00'00'11) << 4 & 0b11'00'00;
+        e[1] |= (w[1] & 0b11'11'00'00) >> 4 & 0b00'11'11;
+        e[2] |= (w[1] & 0b00'00'11'11) << 2 & 0b11'11'00;
+        e[2] |= (w[2] & 0b11'00'00'00) >> 6 & 0b00'00'11;
+        e[3] |= (w[2] & 0b00'11'11'11) << 0 & 0b11'11'11;
+        const char*table="\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x2b\x2f";
+        e[0]=table[e[0]];
+        e[1]=table[e[1]];
+        e[2]=table[e[2]];
+        e[3]=table[e[3]];
+        out+=string(e,e+4);
+    }
+    llu ins=in.size()%3;
+    if (ins){
+        out.end()[-1]='=';
+    }
+    if (ins==1){
+        out.end()[-2]='=';
+    }
+    return out;
+}
+
+string b64decode(const string&_in){
+    const char*table="\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x3e\x7c\x7c\x7c\x3f\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x7c\x7c\x7c\x7c\x7c\x7c\x1a\x1b\x1c\x1d\x1e\x1f\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c\x7c";
+    string in;
+    llu l=0;
+    for (uint8_t w:_in){
+        if (w=='='){
+            l++;
+        }
+        w=table[w];
+        if (w<64){
+            in+=w;
+        }
+    }
+    string out;
+    for (llu q=0;q<in.size();q+=4){
+        uint8_t w[4]={0,0,0,0};
+        uint8_t e[3]={0,0,0};
+        memmove(w,in.data()+q,min(4LLU,in.size()-q));
+        e[0] |= (w[0] & 0b11'11'11) << 2 & 0b11'11'11'00;
+        e[0] |= (w[1] & 0b11'00'00) >> 4 & 0b00'00'00'11;
+        e[1] |= (w[1] & 0b00'11'11) << 4 & 0b11'11'00'00;
+        e[1] |= (w[2] & 0b11'11'00) >> 2 & 0b00'00'11'11;
+        e[2] |= (w[2] & 0b00'00'11) << 6 & 0b11'00'00'00;
+        e[2] |= (w[3] & 0b11'11'11) >> 0 & 0b00'11'11'11;
+        out+=string(e,e+3);
+    }
+    while (l and out.size()){
+        l-=1;
+        out.pop_back();
+    }
+    return out;
+}
+

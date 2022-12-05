@@ -8,34 +8,26 @@
 #include <tuple>
 #include <array>
 #include <type_traits>
+#include <sstream>
+#include <filesystem>
+#include <unordered_map>
+#include <unordered_set>
+#include <fstream>
 #include "pix.hpp"
 #include "alg.hpp"
 #include "bmp.hpp"
+#include "b64.hpp"
+
 using namespace std;
+using namespace filesystem;
 
 using llu=long long unsigned;
 using lli=long long int;
 
-auto pwd(){
-    return system("pwd");
-};
-
-auto ls(){
-    return system("ls");
-};
-
-auto size(bitmap data){
-    cout<<data.size()<<" "<<(data.size()?data[0].size():0)<<endl;
-};
-
-auto puts(auto&...a){
-    int tmp[]={(cout<<string(a)<<" ",0)...};
-    cout<<endl;
-    return 0;
-};
-
 struct universal_arg{
     string data;
+    universal_arg(){}
+    universal_arg(string data):data(data){}
     operator bitmap ()const{
         return bmp_read(data);
     }
@@ -62,28 +54,22 @@ auto call(auto&&f,llu n,auto&&...args){
     }
 }
 
-void result(universal_arg* var,auto&&val){
-    if constexpr (is_same_v<decltype(val),nullptr_t>){
-
-    }else
-    if constexpr (is_same_v<decay_t<decltype(val)>,bitmap >){
-        if (var){
-            bmp_write(val,var[0]);
-        }
-    }else{
-        if (var){
-            var[0]=universal_arg{to_string(val)};
-        }
-    }
+void result(const string&var,auto&&val){
+    bmp_write(val,var);
 }
 
 #define try_invoke_create(fun)                                                 \
-auto try_invoke_##fun(universal_arg* var,auto&...a)                            \
+auto try_invoke_##fun(const string& var,auto&...a)                             \
     ->conditional_t<1,void,decltype(fun(a...))>{                               \
     result(var,fun(a...));                                                     \
 }                                                                              \
 void try_invoke_##fun(auto&...a){                                              \
     cerr<<"call " #fun " with "<<sizeof...(a)-1<<" args failed"<<endl;         \
+    vector<string> tmp={string(a)...};                                         \
+    for (auto&w:tmp){                                                          \
+        cerr<<w<<" ";                                                          \
+    }                                                                          \
+    cerr<<endl;                                                                \
     throw exception();                                                         \
 }                                                                              \
 
@@ -96,7 +82,7 @@ try_invoke_create(negative)
 
 
 #define universal_call(fun)                                                    \
-    ([](auto var,const vector<universal_arg>&a){                               \
+    ([](const auto&var,const vector<universal_arg>&a){                         \
         return call([&](auto a_ptr){                                           \
             if constexpr (tuple_size_v<remove_reference_t<decltype(*a_ptr)>>){ \
                 remove_cvref_t<decltype(*a_ptr)> tmp;                          \
@@ -110,103 +96,194 @@ try_invoke_create(negative)
         },a.size());                                                           \
     })                                                                         \
 
+
+std::string _popen(std::string q){
+    std::string s;
+    auto pipe=popen(q.c_str(), "r");
+    int c;
+    while ((c = fgetc(pipe)) != EOF) {
+        s+=static_cast<char>(c);
+    }
+    pclose(pipe);
+    return s;
+}
+
+
+// vector<string> split_args(string s){
+//     auto b = popen("for _w in "+s+" ; do echo $_w | base64 ; done");
+//     vector<string> bs(1);
+//     for (auto w:b){
+//         if (w=='\n'){
+//             bs.emplace_back();
+//         }else{
+//             bs.back()+=w;
+//         }
+//     }
+//     if (bs.back().empty()){
+//         bs.pop_back();
+//     }
+//     for (auto&w:bs){
+//         w=b64decode(w);
+//         if (w.size()){
+//             w.pop_back();
+//         }
+//     }
+//     return bs;
+// }
+
+
 int main(int _argc,char**_argv){
-    map<string,universal_arg> vars;
-    map<string,function<void(universal_arg*,const vector<universal_arg>&)>> funs;
-    funs["ls"]=universal_call(ls);
-    funs["pwd"]=universal_call(pwd);
-    funs["puts"]=universal_call(puts);
+    string executable=canonical(_argv[0]);
+    vector<universal_arg> vars;
+    map<string,function<void(const string&,const vector<universal_arg>&)>> funs;
     funs["same"]=universal_call(same);
     funs["scale"]=universal_call(scale);
     funs["negative"]=universal_call(negative);
-    vector<string> argv(_argv,_argv+_argc);
-    int c=EOF;
-    llu mode=0;
-    for (auto&w:argv){
-        if (w=="--interactive"){
-            c=0;
-            w="";
-            mode=1;
+    vector<string> argv(_argv+1,_argv+_argc);
+    unordered_map<string,llu> available_flags{
+        {"--negative",0},
+        {"--scale",2},
+        {"--same",0},
+        {"--help",0},
+        {"--print-args",0},
+    };
+    vector<pair<string,string>> undo;
+    while (not cin.eof()){
+        string in;
+        if (argv.size()==0){
+            cout<<">>> "<<flush;
+            getline(cin,in);
+            stringstream ss(_popen((executable+" --print-args "+in).c_str()));
+            {
+                llu tmp;
+                ss>>tmp;
+                argv.resize(tmp);
+                for (auto&w:argv){
+                    ss>>tmp;
+                    w.resize(tmp);
+                    for (auto&e:w){
+                        ss>>tmp;
+                        e=tmp;
+                    }
+                }
+            }
+            argv=decltype(argv)(argv.begin()+1,argv.end());
         }
-        if (w=="--help"){
-            cerr<<"*some useful help message*"<<endl;
-            exit(0);
+        unordered_map<string,vector<string>> flags;
+        vector<string> files;
+        for (llu q=0;q<argv.size();){
+            if (available_flags.count(argv[q])){
+                auto b=q+1;
+                auto e=b+available_flags[argv[q]];
+                if (e<=argv.size()){
+                    flags[argv[q]]=vector<string>(argv.begin()+b,argv.begin()+e);
+                }else{
+                    cerr<<"flag "<<argv[q]<<" takes "<<available_flags[argv[q]]<<" parameters"<<endl;
+                    throw exception();
+                }
+                q=e;
+            }else{
+                files.push_back(argv[q]);
+                q+=1;
+            }
         }
-    }
-    argv.resize(copy_if(argv.begin(),argv.end(),argv.begin(),[](auto&q){return q.size();})-argv.begin());
-    llu argu=1;
-    while (c!=EOF or argu<argv.size()){
-        if (c!=EOF){
-            printf(">>> ");
-            stringstream ss;
-            while ((c=getchar(),c!='\n' and c!=EOF)){
-                ss<<char(c);
+        if (flags.count("--print-args")){
+            cout<<argv.size()<<"\n";
+            for (auto&w:argv){
+                cout<<w.size()<<"\n";
+                for (auto&e:w){
+                    cout<<(llu)(uint8_t)(e)<<" ";
+                }
+                cout<<"\n";
             }
-            if (c==EOF){
-                printf("\n");
-            }
-            string s;
-            while (ss>>s){
-                argv.push_back(s);
-            }
+            files.resize(0);
+        }
+        if (flags.count("--help")){
+            cout<<"usage: ./bmp input.bmp --some_flags... output.bmp"<<endl;
+            cout<<"if output.bmp is missing, then output.bmp is input.bmp"<<endl;
+            cout<<"available flags:"<<endl;
+            cout<<"    --negative"<<endl;
+            cout<<"    --scale new_height new_width"<<endl;
+            cout<<"    --same"<<endl;
+            cout<<"if no args are given starts interactive mode"<<endl;
+            cout<<"commands for interactive mode:"<<endl;
+            cout<<">>> input.bmp --some_flags... output.bmp"<<endl;
+            cout<<"    same as it is written in shell args"<<endl;
+            cout<<"    symbols should be escaped like in shell command"<<endl;
+            cout<<">>> cd dir      (changes directory)"<<endl;
+            cout<<"any other commands are transferred to shell"<<endl;
+            cout<<"example"<<endl;
+            cout<<">>> ls -l       (calls ls command)"<<endl;
         }
         try{
-            for (;argu<argv.size();){
-                if (argu+2<argv.size() and argv[argu+1]=="["s){
-                    llu e=argu+2;
-                    while (e+1<argv.size() and argv[e]!="]"s){
-                        ++e;
+            if (files.size()>0){
+                if (files[0].size()>=4 and string(files[0].end()-4,files[0].end())==".bmp"){
+                    string infile = files[0];
+                    string outfile = files[0];
+                    if (files.size()>=2){
+                        outfile=files[1];
                     }
-                    if (argv[e]!="]"s){
-                        cerr<<"args error"<<endl;
-                        throw exception();
-                    }
-                    vector<universal_arg> args;
-                    for (llu q=argu+2;q<e;++q){
-                        if (vars.count(argv[q])){
-                            args.push_back({vars[argv[q]]});
-                        }else{
-                            args.push_back({argv[q]});
+                    if (in.size()){
+                        try{
+                            ifstream f(outfile);
+                            if (f.good()){
+                                undo.push_back({
+                                    outfile,
+                                    string(istreambuf_iterator<char>(f),istreambuf_iterator<char>())
+                                });
+                            }else{
+                                undo.push_back({outfile,""});
+                            }
+                        }catch(...){
+                            undo.push_back({outfile,""});
                         }
                     }
-                    funs.at(argv[argu])(nullptr,args);
-                    argu=e+1;
-                }else
-                if (argu+4<argv.size() and argv[argu+1]=="="s and argv[argu+3]=="["s){
-                    llu e=argu+4;
-                    while (e+1<argv.size() and argv[e]!="]"s){
-                        ++e;
-                    }
-                    if (argv[e]!="]"s){
-                        cerr<<"args error"<<endl;
-                        throw exception();
-                    }
-                    vector<universal_arg> args;
-                    for (llu q=argu+4;q<e;++q){
-                        if (vars.count(argv[q])){
-                            args.push_back({vars[argv[q]]});
-                        }else{
-                            args.push_back({argv[q]});
+                    bmp_write(bmp_read(infile),outfile);
+                    for (auto&w:argv){
+                        if (flags.count(w)){
+                            vars.push_back(outfile);
+                            copy(flags[w].begin(),flags[w].end(),back_inserter(vars));
+                            auto fun=string(w.begin()+2,w.end());
+                            funs.at(fun)(outfile,vars);
+                            vars.resize(0);
                         }
                     }
-                    vars[argv[argu]]={argv[argu]};
-                    funs.at(argv[argu+2])(&vars[argv[argu]],args);
-                    argu=e+1;
                 }else
-                if (argu+2<argv.size() and argv[argu+1]=="="s){
-                    vars[argv[argu]]=vars.at(argv[argu+2]);
-                    argu=argu+3;
+                if (files[0]=="exit"){
+                    break;
+                }else
+                if (files[0]=="undo"){
+                    if (undo.empty()){
+                        cerr<<"nothing to undo"<<endl;
+                    }else{
+                        cout<<"undo changes for "<<undo.back().first<<endl;
+                        {
+                            ofstream f(undo.back().first);
+                            f<<undo.back().second;
+                        }
+                        undo.pop_back();
+                    }
+                }else
+                if (files[0]=="cd"){
+                    if (files.size()>=2){
+                        current_path(files[1]);
+                    }else{
+                        cerr<<"usage: cd [path]";
+                    }
                 }else{
-                    cerr<<"args error"<<endl;
-                    throw exception();
+                    system(in.c_str());
                 }
             }
         }catch(exception&e){
             cerr<<e.what()<<endl;
-            argu=argv.size();
-            if (mode==0){
-                throw;
-            }
         }
+        if (in.size()){
+            argv.resize(0);
+        }else{
+            break;
+        }
+    }
+    if (cin.eof()){
+        cout<<endl;
     }
 }

@@ -91,6 +91,7 @@ void send_error(bool con,string mes){
 
 
 auto open_file(const string&filename,llu len=-1LLU){
+    errno=0;
     auto _t=portable_mmap(filename,len);
     pair t(filename,_t);
     auto p=new auto(t);
@@ -163,6 +164,8 @@ struct device_independent_bitmap{
 #define get_bit(a,s)   (((a)[(s)/8LLU/sizeof((a)[0])]>>(s)%(8LLU*sizeof((a)[0])))&1LLU)
 #define set_bit(a,s,d) {(a)[(s)/8LLU/sizeof((a)[0])]&=~(1LLU<<(s)%(8LLU*sizeof((a)[0])));(a)[(s)/8LLU/sizeof((a)[0])]+=((d)+0LLU)<<(s)%(8LLU*sizeof((a)[0]));}
 
+#include "/Users/gera/c/d"
+
 bitmap bmp_read(string filename){
     auto uptr=open_file(filename);
     char*data=uptr->second.first;
@@ -194,7 +197,7 @@ bitmap bmp_read(string filename){
         {0,"BITFIELDS",},
         {1,"JPEG",},
         {1,"PNG",},
-        {0,"ALPHABITFIELDS",},
+        {1,"ALPHABITFIELDS",},
         {1,"",},
         {1,"",},
         {1,"",},
@@ -207,20 +210,21 @@ bitmap bmp_read(string filename){
     send_error(comp+0LLU>=comps.size() or comps[comp].second.size()==0,"unknown way of compression: "+to_string(comp));
     send_error(comps[comp].first,"compression method "+comps[comp].second+" is not supported");
     send_error(comp and dib_data.number_of_bits_per_pixel==16,"compression method "+comps[comp].second+" is not supported for 16 bit per pixel bmp");
-    char*colors=(data+sizeof(bitmap_file_header)+sizeof_dib_data);
+    char*_colors=(data+sizeof(bitmap_file_header)+sizeof_dib_data);
     char*main=data+bit_data.starting_address_of_data;
     if (comp==3){
-        colors+=12;
-        if (colors>main){
-            colors-=12;
+        _colors+=12;
+        if (_colors>main){
+            _colors-=12;
         }
     }
     if (comp==6){
-        colors+=16;
-        if (colors>main){
-            colors-=16;
+        _colors+=16;
+        if (_colors>main){
+            _colors-=16;
         }
     }
+    vector<char> colors(_colors,main);
     llu horizontal_len=0;
     llu width=0;
     llu height=0;
@@ -233,81 +237,93 @@ bitmap bmp_read(string filename){
     }
     horizontal_len=(dib_data.number_of_bits_per_pixel*width+31)/32*4;
     send_error(main+height*horizontal_len>data+len,"file is too small");
-    lli counts[4]={0,0,0,0};
+    llu counts[4]={32,32,32,32};
     llu bit_len=dib_data.number_of_bits_per_pixel;
+    {
+        llu masks[4]={
+            0b00000000000000000000000011111111,
+            0b00000000000000001111111100000000,
+            0b00000000111111110000000000000000,
+            0b11111111000000000000000000000000,
+        };
+        if (bit_len==16){
+            masks[0]=0b0000000000011111;
+            masks[1]=0b0000001111100000;
+            masks[2]=0b0111110000000000;
+            masks[3]=0b1000000000000000;
+        }
+        for (llu c=0;c<4;++c){
+            while((masks[c]&1)==0){
+                masks[c]>>=1;
+                counts[c]-=1;
+            }
+            while((masks[c]&128)==0){
+                masks[c]<<=1;
+                counts[c]+=1;
+            }
+        }
+    }
     llu masks[4]={
-        0b00000000111111110000000000000000,
-        0b00000000000000001111111100000000,
         0b00000000000000000000000011111111,
+        0b00000000000000001111111100000000,
+        0b00000000111111110000000000000000,
         0b11111111000000000000000000000000,
     };
     if (bit_len==16){
-        masks[0]=0b0111110000000000;
+        masks[0]=0b0000000000011111;
         masks[1]=0b0000001111100000;
-        masks[2]=0b0000000000011111;
+        masks[2]=0b0111110000000000;
         masks[3]=0b1000000000000000;
     }
-    for (llu c=0;c<4;++c){
-        if (dib_data.way_of_compression==3 or dib_data.way_of_compression==6){
-            if ((&dib_data.red_mask)[c]){
-                masks[c]=(&dib_data.red_mask)[c];
+    vector<char> line(horizontal_len+4);
+    for (llu w=0;w<height;++w){
+        t.emplace_back();
+        copy(main+w*horizontal_len,main+(w+1)*horizontal_len,line.begin());
+        for (llu e=0;e<width;++e){
+            llu bit_r=0;
+            memmove(&bit_r,line.data()+e*bit_len/8,4LLU);
+            t.back().push_back((pixel&)bit_r);
+        }
+    }
+    if (bit_len<8){
+        for (llu w=0;w<height;++w){
+            for (llu e=0;e<width;++e){
+                uint32_t res=0;
+                uint32_t bit_r=(uint32_t&)(t[w][e]);
+                for (llu r=0;r<bit_len;++r){
+                    char*place=(char*)&bit_r;
+                    place+=r/8;
+                    llu ind=e*bit_len+r;
+                    ind%=8;
+                    ind=(7/bit_len-ind/bit_len)*bit_len+ind%bit_len;
+                    llu bit=(place[0]>>ind)&1LLU;
+                    res|=bit<<r;
+                }
+                t[w][e]=(pixel&)res;
             }
-        }
-        while((masks[c]&1)==0){
-            masks[c]>>=1;
-            counts[c]+=1;
-        }
-        while((masks[c]&128)==0){
-            masks[c]<<=1;
-            counts[c]-=1;
         }
     }
     for (llu w=0;w<height;++w){
-        t.emplace_back();
-        vector<char> line(main+w*horizontal_len,main+(w+1)*horizontal_len);
         for (llu e=0;e<width;++e){
             llu res=0;
-            for (llu r=0;r<bit_len;++r){
-                llu ind=e*bit_len+r;
-                char*place=line.data();
-                place+=ind/8;
-                ind%=8;
-                ind=(7/bit_len-ind/bit_len)*bit_len+ind%bit_len;
-                llu bit=(place[0]>>ind)&1LLU;
-                res|=bit<<r;
-            }
-            if (main-colors+0LLU>=(res+1)*sizeof(pixel)){
+            res=(uint32_t&)t[w][e];
+            res&=(1LLU<<bit_len)-1;
+            if (colors.size()+0LLU>=(res+1)*sizeof(pixel)){
                 pixel tmp;
-                memmove(&tmp,colors+res*sizeof(pixel),sizeof(pixel));
-                t.back().push_back(tmp);
+                memmove(&tmp,colors.data()+res*sizeof(pixel),sizeof(pixel));
+                t[w][e]=tmp;
             }else{
                 llu tmp[4]={0,0,0,0};
-                llu masks[4]={
-                    0b00000000111111110000000000000000,
-                    0b00000000000000001111111100000000,
-                    0b00000000000000000000000011111111,
-                    0b11111111000000000000000000000000,
-                };
-                if (bit_len==16){
-                    masks[0]=0b0111110000000000;
-                    masks[1]=0b0000001111100000;
-                    masks[2]=0b0000000000011111;
-                    masks[3]=0b1000000000000000;
-                }
-                pixel _tmp;
                 for (llu c=0;c<4;++c){
                     tmp[c]=res&masks[c];
-                    if (counts[c]>0){
-                        tmp[c]>>=counts[c];
-                    }else{
-                        tmp[c]<<=-counts[c];
-                    }
+                    tmp[c]<<=counts[c];
                 }
-                _tmp.red=tmp[0];
-                _tmp.green=tmp[1];
-                _tmp.blue=tmp[2];
-                _tmp.alpha=tmp[3];
-                t.back().push_back(_tmp);
+                t[w][e]={
+                    ((uint8_t*)(tmp+0))[4],
+                    ((uint8_t*)(tmp+1))[4],
+                    ((uint8_t*)(tmp+2))[4],
+                    ((uint8_t*)(tmp+3))[4],
+                };
             }
         }
     }
