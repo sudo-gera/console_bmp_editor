@@ -78,3 +78,24 @@ add_test(NAME same_bmp_08_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/sam
 add_test(NAME same_test4_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/test4.bmp" "--same" "result.bmp")
 add_test(NAME same_test4_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/same/test4.bmp" "result.bmp")
 
+add_test(NAME same_food_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/food.bmp" "--same" "result.bmp")
+add_test(NAME same_food_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/same/food.bmp" "result.bmp")
+
+add_test(NAME negative_food_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/food.bmp" "--negative" "result.bmp")
+add_test(NAME negative_food_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/negative/food.bmp" "result.bmp")
+
+add_test(NAME scale_food_5000_7000_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/food.bmp" "--scale" "5000" "7000" "result.bmp")
+add_test(NAME scale_food_5000_7000_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/scale/food_5000_7000.bmp" "result.bmp")
+
+add_test(NAME scale_food_7000_5000_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/food.bmp" "--scale" "7000" "5000" "result.bmp")
+add_test(NAME scale_food_7000_5000_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/scale/food_7000_5000.bmp" "result.bmp")
+
+add_test(NAME scale_food_700_500_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/food.bmp" "--scale" "700" "500" "result.bmp")
+add_test(NAME scale_food_700_500_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/scale/food_700_500.bmp" "result.bmp")
+
+add_test(NAME scale_food_70_50_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/food.bmp" "--scale" "70" "50" "result.bmp")
+add_test(NAME scale_food_70_50_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/scale/food_70_50.bmp" "result.bmp")
+
+add_test(NAME scale_food_7_5_create COMMAND bmp "${PROJECT_SOURCE_DIR}/tests/sources/food.bmp" "--scale" "7" "5" "result.bmp")
+add_test(NAME scale_food_7_5_check  COMMAND "diff" "${PROJECT_SOURCE_DIR}/tests/scale/food_7_5.bmp" "result.bmp")
+
