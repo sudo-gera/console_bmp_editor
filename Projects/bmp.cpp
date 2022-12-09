@@ -61,7 +61,7 @@ void send_error(bool con,string mes){
             lstat(file,&st);
             len=(llu)st.st_size;
         }else{
-            int tmp=ftruncate(fd,len);
+            [[maybe_unused]]int tmp=ftruncate(fd,len);
         }
         if (errno){
             perror((to_string(len)+" lstat|ftruncate").c_str());
@@ -83,7 +83,7 @@ void send_error(bool con,string mes){
         pair t(data,len);
         return t;
     }
-    auto portable_munmap(const string&filename,char*data,llu len){
+    auto portable_munmap([[maybe_unused]]const string&filename,char*data,llu len){
         munmap(data,len);
     }
 #endif
@@ -163,8 +163,6 @@ struct device_independent_bitmap{
 
 #define get_bit(a,s)   (((a)[(s)/8LLU/sizeof((a)[0])]>>(s)%(8LLU*sizeof((a)[0])))&1LLU)
 #define set_bit(a,s,d) {(a)[(s)/8LLU/sizeof((a)[0])]&=~(1LLU<<(s)%(8LLU*sizeof((a)[0])));(a)[(s)/8LLU/sizeof((a)[0])]+=((d)+0LLU)<<(s)%(8LLU*sizeof((a)[0]));}
-
-#include "/Users/gera/c/d"
 
 bitmap bmp_read(string filename){
     auto uptr=open_file(filename);
@@ -280,9 +278,9 @@ bitmap bmp_read(string filename){
         t.emplace_back();
         copy(main+w*horizontal_len,main+(w+1)*horizontal_len,line.begin());
         for (llu e=0;e<width;++e){
-            llu bit_r=0;
+            pixel bit_r={0,0,0,0};
             memmove(&bit_r,line.data()+e*bit_len/8,4LLU);
-            t.back().push_back((pixel&)bit_r);
+            t.back().push_back(bit_r);
         }
     }
     if (bit_len<8){
@@ -299,7 +297,7 @@ bitmap bmp_read(string filename){
                     llu bit=(place[0]>>ind)&1LLU;
                     res|=bit<<r;
                 }
-                t[w][e]=(pixel&)res;
+                memmove(&(t[w][e]),&res,sizeof(pixel));
             }
         }
     }

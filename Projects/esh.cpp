@@ -16,7 +16,6 @@
 #include "pix.hpp"
 #include "alg.hpp"
 #include "bmp.hpp"
-#include "b64.hpp"
 
 using namespace std;
 using namespace filesystem;
@@ -109,29 +108,6 @@ std::string _popen(std::string q){
 }
 
 
-// vector<string> split_args(string s){
-//     auto b = popen("for _w in "+s+" ; do echo $_w | base64 ; done");
-//     vector<string> bs(1);
-//     for (auto w:b){
-//         if (w=='\n'){
-//             bs.emplace_back();
-//         }else{
-//             bs.back()+=w;
-//         }
-//     }
-//     if (bs.back().empty()){
-//         bs.pop_back();
-//     }
-//     for (auto&w:bs){
-//         w=b64decode(w);
-//         if (w.size()){
-//             w.pop_back();
-//         }
-//     }
-//     return bs;
-// }
-
-
 int main(int _argc,char**_argv){
     string executable=canonical(_argv[0]);
     vector<universal_arg> vars;
@@ -199,7 +175,7 @@ int main(int _argc,char**_argv){
             files.resize(0);
         }
         if (flags.count("--help")){
-            cout<<"usage: ./bmp input.bmp --some_flags... output.bmp"<<endl;
+            cout<<"usage: ./bmp input.bmp --filter1 arg1 arg2 ... --filter2 arg1 arg2 ... output.bmp"<<endl;
             cout<<"if output.bmp is missing, then output.bmp is input.bmp"<<endl;
             cout<<"available flags:"<<endl;
             cout<<"    --negative"<<endl;
@@ -271,7 +247,7 @@ int main(int _argc,char**_argv){
                         cerr<<"usage: cd [path]";
                     }
                 }else{
-                    system(in.c_str());
+                    [[maybe_unused]]auto tmp=system(in.c_str());
                 }
             }
         }catch(exception&e){
