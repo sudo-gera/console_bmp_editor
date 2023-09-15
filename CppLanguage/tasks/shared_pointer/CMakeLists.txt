@@ -1,2 +1,0 @@
-add_executable(test_shared_pointer test_shared_pointer.cpp)
-add_test(NAME test_shared_pointer COMMAND test_shared_pointer)
